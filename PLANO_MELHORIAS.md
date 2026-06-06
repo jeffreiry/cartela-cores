@@ -179,3 +179,111 @@
 
 - [ ] **Extração automática de cor dominante**: ao subir foto de uma peça, usar ColorThief ou similar para sugerir o hex dominante automaticamente — elimina seleção manual de cor.
 - [ ] **Validação da fórmula contra catálogo atual**: rodar o cálculo ΔE nas 52 peças e comparar com os scores manuais — identificar quais estão mais desalinhados.
+
+---
+
+# 🖌️ Identidade Visual & Modernização
+
+> Análise crítica como Product Designer Sênior, focada em tornar a identidade visual
+> mais moderna e coesa no **desktop** e no **mobile**.
+> Direção escolhida: **editorial afiada** (refinar a pegada Nike/Adidas — cantos
+> nítidos, bold, uppercase com propósito — não trocá-la por uma estética soft).
+> Referência de tokens: [docs/design-system.md](docs/design-system.md).
+
+## Diagnóstico
+
+O app tem uma boa intenção de identidade ("Nike/Adidas: bold, editorial, sharp"),
+mas ela se **diluiu na prática**. Três tensões enfraquecem a percepção de qualidade:
+
+1. **Drift de border-radius.** O design system declara cantos afiados (`--r: 4px`,
+   pills/botões em `2px`), mas as telas mais novas vazaram para `8px` (cards do
+   dashboard, modais de detalhe, `.lotd-card`, `combo sheets`) e até `12px`
+   (filtro mobile). O resultado é um app que não é nem afiado nem suave — lê-se
+   como "remendado", o oposto de uma identidade forte.
+2. **Tudo grita.** Uppercase + `letter-spacing` está em *todo* rótulo, botão,
+   badge e título. Quando tudo é maiúsculo e espaçado, nada tem hierarquia — e o
+   efeito é "painel administrativo de 2018", não "marca de moda 2025".
+3. **Fundações frágeis.** Base de `14px` (pequena), fonte única, dezenas de hex
+   cravados no markup fora dos tokens, e durações de transição ad-hoc
+   (`.12 / .15 / .2 / .25 / .3 / .35 / .5 / .7 / .8 / .9s`). Sem fundação
+   consistente, qualquer polish fica superficial.
+
+A boa notícia: a base é sólida (tokens em `:root`, micro-interações já existem,
+bottom-nav mobile correto). É **consolidação**, não reconstrução.
+
+## 🔴 Fundações — decidir a identidade (desktop + mobile)
+
+- [ ] **Unificar a linguagem de raio em UMA lógica afiada.** Definir só dois
+  tokens: `--r: 4px` (cards/superfícies) e `--r-sm: 2px` (botões/pills/badges).
+  Eliminar todo `8px` e `12px` solto (dashboard cards ~L1259/1271, `.lotd-card`
+  L1214, modais de detalhe L1028/1076, `combo sheets`, filtro mobile L975).
+  *Por quê:* coerência de raio é o sinal nº 1 de um sistema maduro.
+- [ ] **Subir a base tipográfica para 16px** (`html{font-size}` L167) e revisar a
+  escala em `rem`. Hoje `0.65rem` = 9px e há rótulos em `0.46–0.6rem` (ilegíveis,
+  pior no mobile). *Cross-ref:* item de "fonte < 0.6rem" na seção UX — tratar
+  como **escala tipográfica única**, não correções pontuais.
+- [ ] **Reduzir o uppercase a eyebrows e labels.** Manter caps em: tags de seção,
+  rótulos de campo, badges curtos. Remover de: nomes de peça, títulos de card,
+  textos de botão longos. Hierarquia deve vir de **peso + tamanho**, não de caps.
+- [ ] **Adotar uma fonte de display** para títulos (H2/page-heading/hero),
+  mantendo Plus Jakarta Sans no corpo. Um par display+corpo é o atalho mais rápido
+  para sofisticação editorial — num app de moda, um display com caráter (ou um
+  serif para headers) eleva muito a percepção. *(Portfolio usa Manrope+Inter como
+  referência de pareamento.)*
+- [ ] **Tokenizar TODAS as cores cravadas no markup.** Hoje há `#7B3F2B`
+  (`.lotd-card` L1214), `#A04E2E` (hover de botões), `#4E7A1A`, `#5060A8`,
+  `#7A5E00`, `#3A5A0A`, `#9A3820` etc. espalhados. Mover para `:root` como tokens
+  semânticos (`--status-in`, `--status-off`, `--accent-hover`…). *Pré-requisito
+  para dark mode e para consistência real.*
+- [ ] **Criar uma escala de espaçamento (4 / 8pt).** Substituir os gaps ad-hoc
+  (6/8/10/12/14/16/20/24/32) por uma régua fixa (`4 8 12 16 24 32 48 64`). Ritmo
+  consistente é o que separa "alinhado" de "quase alinhado".
+- [ ] **Tokens de movimento.** Padronizar 2–3 durações (`--t-fast:120ms`,
+  `--t:200ms`, `--t-slow:320ms`) e um easing (`cubic-bezier(.4,0,.2,1)`). Aplicar
+  em todas as `transition`. *Movimento consistente é identidade percebida.*
+
+## 🟡 Componentes & hierarquia
+
+- [ ] **Sistema de botões com 4 papéis claros.** Hoje quase todo botão é o mesmo
+  bloco `--ink` → `--accent` no hover (`.btn-p`, `.btn-analyze`, `.lk-btn`,
+  `.lh-use-btn`, `.side-cta`, `.cp`…). Definir: **primário** (ink), **secundário**
+  (outline), **terciário/ghost** (texto), **destrutivo** (vermelho). Sem
+  hierarquia de botão, a tela não diz "o que é a ação principal aqui".
+- [ ] **Sistema de elevação (sombras em camadas).** As sombras atuais são chapadas
+  e monocromáticas. Definir 3 níveis (`--elev-1/2/3`) com sombras suaves e
+  levemente quentes — usar elevação (não só borda `1.5px`) para separar superfícies.
+- [ ] **Diferenciar cards por hierarquia.** Looks, canvas do Combinador e Look do
+  Dia são conteúdo primário; stats e meta são secundários. Hoje quase tudo é
+  "surface + borda 1.5px + mesmo raio". Variar tratamento (peso de borda, fundo,
+  elevação) para criar foco.
+- [ ] **Substituir o emoji-logo (🍂) por um logomark desenhado.** É a assinatura da
+  marca (topbar L184, login L1593, side-brand) e hoje renderiza diferente em cada
+  SO. Um símbolo SVG simples já muda o patamar de seriedade. *Cross-ref:* item de
+  "emojis como ícones" — tratar logo + ícones de UI no mesmo movimento (set SVG).
+- [ ] **Revisar contraste dos textos terciários** (`--text3 #9C8270`,
+  `--text4 #C4AE98`) sobre fundo claro — provavelmente reprovam WCAG AA.
+  Identidade moderna inclui acessibilidade. *Cross-ref:* item de contraste na UX.
+
+## 🟢 Telas-chave — aplicar a identidade
+
+- [ ] **Login como momento de marca (desktop + mobile).** É a primeira impressão e
+  hoje é um card centralizado com emoji e estilos inline (L1591–1605). Merece
+  tratamento editorial: logomark, tipografia de display, talvez um split-screen no
+  desktop (imagem/cor à esquerda, form à direita) e full-bleed no mobile.
+- [ ] **Dashboard mais editorial.** O bento (`6fr 4fr`, L1211) é um bom começo.
+  Levar adiante: o "Look do Dia" como herói com tipografia de display grande, e os
+  stats com mais respiro e hierarquia (não como caixas uniformes).
+- [ ] **Combinador no mobile.** As 3 colunas do desktop (closet 240px + canvas +
+  sugestões 240px, L1313–1315) colapsam para um closet de 220px de altura
+  empilhado (L1560) — apertado. Repensar como **bottom-sheet** para o closet ou
+  abas internas, deixando o canvas do look protagonista na tela pequena.
+  *Cross-ref:* item "Repensar o Combinador no mobile" na seção UX.
+- [ ] **Dark mode como consequência da tokenização.** Depois que todas as cores
+  forem tokens semânticos, um tema escuro vira troca de `:root` — e combina com a
+  pegada editorial (modo "noturno" quente). Fazer só após a tokenização.
+
+## Ordem sugerida (identidade)
+1. Fundações primeiro (raio, tipografia, tokens de cor/espaço/movimento) — destravam tudo.
+2. Componentes (botões, elevação, logomark/ícones).
+3. Telas-chave (login, dashboard, combinador mobile).
+4. Dark mode por último, como colheita da tokenização.
