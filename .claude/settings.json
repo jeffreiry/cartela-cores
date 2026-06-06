@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Se nesta conversa foram feitas alterações no projeto Outono Quente (arquivos .html, .md, .js, .css ou configurações), atualize o arquivo CHANGELOG.md em c:/Users/Pichau/Downloads/@CLAUDE-CODE/Cartela_Cores/CHANGELOG.md adicionando uma entrada na seção '## [Não publicado]' com a data de hoje e um resumo curto do que foi feito. Também marque com [x] os itens correspondentes no PLANO_MELHORIAS.md se algum foi concluído. Se nenhuma alteração foi feita no projeto, não faça nada.",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

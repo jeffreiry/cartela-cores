@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Copy-Item \"C:\\\\Users\\\\Pichau\\\\Downloads\\\\outono-quente-closet.html\" \"C:\\\\Users\\\\Pichau\\\\Documents\\\\@CLAUDE-CODE\\\\index.html\")",
+      "Bash(cp \"/mnt/c/Users/Pichau/Downloads/outono-quente-closet.html\" \"/mnt/c/Users/Pichau/Documents/@CLAUDE-CODE/index.html\")",
+      "Bash(mkdir -p \"/mnt/c/Users/Pichau/Documents/@CLAUDE-CODE/.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell(Get-Command node -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"C:\\\\Program Files \\(x86\\)\\\\nodejs\\\\node.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:APPDATA\\\\npm\\\\node.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\node.exe\" -ErrorAction SilentlyContinue)",
+      "WebSearch",
+      "WebFetch(domain:www.insider.com.br)",
+      "WebFetch(domain:www.dafiti.com.br)",
+      "WebFetch(domain:www.insiderstore.com.br)",
+      "WebFetch(domain:produto.mercadolivre.com.br)",
+      "WebFetch(domain:www.netshoes.com.br)",
+      "Bash(wc -l \"/mnt/c/Users/Pichau/Documents/@CLAUDE-CODE/index.html\" 2>/dev/null || echo \"não acessível via bash\")",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\Pichau\\\\Documents\\\\@CLAUDE-CODE\\\\index.html\" | Measure-Object -Line\\).Lines)"
+    ]
+  }
+}
