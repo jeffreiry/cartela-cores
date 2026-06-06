@@ -1,7 +1,7 @@
 # Plano de Melhorias — Outono Quente (Closet & Combinador)
 
 > Checklist priorizado. Marque `[x]` conforme concluir.
-> Estado atual: app de página única (`index.html`, ~3.730 linhas), Firebase Auth + Firestore funcionando, deploy no Netlify.
+> Estado atual: app de página única (`index.html`, ~3.730 linhas), Firebase Auth + Firestore funcionando, deploy automático na Vercel via GitHub (`jeffreiry/cartela-cores`).
 
 ---
 
@@ -9,8 +9,8 @@
 
 ### Limpeza técnica
 - [ ] Remover os 14 `console.log` de debug deixados durante o desenvolvimento (linhas ~59, 61, 69, 71, 3463, 3469, 3472, 3477 etc.). Manter apenas os `console.error` legítimos de tratamento de erro.
-- [ ] Remover o `Cartela_Cores.zip` do diretório (backup manual — usar Git para versionamento).
-- [ ] Inicializar um repositório Git no projeto (hoje não é repo). Permite histórico, desfazer e deploy contínuo.
+- [x] Remover o `Cartela_Cores.zip` do diretório (backup manual — usar Git para versionamento).
+- [x] Inicializar um repositório Git no projeto (hoje não é repo). Permite histórico, desfazer e deploy contínuo.
 
 ### SEO / Compartilhamento
 - [ ] Adicionar `<meta name="description">` no `<head>`.
@@ -47,9 +47,9 @@
 ### Funcionalidades de domínio (closet)
 - [ ] **Registro de uso**: marcar quando um look foi usado e em que data — evita repetir roupa e mostra peças esquecidas.
 - [ ] **Estatísticas**: peça mais/menos usada, cores favoritas, "custo por uso".
-- [ ] **Sugestão do dia**: integrar clima (API de previsão) para sugerir looks adequados à temperatura.
+- [x] **Sugestão do dia**: integrar clima (API de previsão) para sugerir looks adequados à temperatura.
 - [ ] **Modo viagem**: montar mala/cápsula a partir de N peças que combinam entre si.
-- [ ] **Detalhe do look**: abrir um look em tela cheia com foto grande + peças + score.
+- [x] **Detalhe do look**: abrir um look em tela cheia com foto grande + peças + score.
 
 ### UX / Acessibilidade
 - [ ] Estados de carregamento (skeleton) ao sincronizar com o Firestore, em vez de só toast.
@@ -60,7 +60,7 @@
 ### Organização de código
 - [ ] Separar o arquivo único em `index.html` + `styles.css` + `app.js` (manutenção mais fácil que 3.730 linhas).
 - [ ] Extrair o array de `items` (52 peças) para um `data.json` separado.
-- [ ] Remover o `server.js` se o fluxo é só Live Server + Netlify (ou documentar para que serve).
+- [x] Remover o `server.js` se o fluxo é só Live Server + Netlify (ou documentar para que serve).
 
 ---
 

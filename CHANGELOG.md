@@ -127,6 +127,16 @@
 
 ---
 
+## 2026-06-06
+
+### Infraestrutura
+- `server.js` removido — servia apenas arquivos estáticos localmente; projeto é 100% estático
+- Repositório Git inicializado e conectado ao GitHub (`jeffreiry/cartela-cores`)
+- Deploy automático configurado via Vercel — todo `git push` gera deploy sem intervenção manual
+- Migração de upload manual → Vercel (mesmo fluxo do Portfolio e Painel Saúde)
+
+---
+
 ## 2026-06-05
 
 ### Aba Cartela — alinhamento com guia-cartela.md
